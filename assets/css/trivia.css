@@ -21,7 +21,7 @@ div#progressBar {
   justify-content: center;
   text-align: center;
   z-index: 1;
-  min-height: 220px;
+  min-height: 280px;
   max-height: 95vw;
   max-width: 80vh;
   min-width: 250px;

@@ -27,7 +27,7 @@ svg {
 
 .dodecagon-cw {
   animation-name: rotation-cw;
-  animation-duration: 1200s;
+  animation-duration: 4000s;
   animation-iteration-count: infinite;
 }
 
@@ -42,7 +42,7 @@ svg {
 
 .dodecagon-ccw {
   animation-name: rotation-ccw;
-  animation-duration: 1600s;
+  animation-duration: 4000s;
   animation-iteration-count: infinite;
 }
 

@@ -7,7 +7,6 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./assets/js/lib/jquery-2.1.4.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/menu.css" />
     <link rel="stylesheet" href="./assets/css/trivia.css" />
     <link rel="stylesheet" href="./assets/css/circle.css" />
     <link
@@ -18,15 +17,32 @@
   <body>
     <div class="container">
       <div id="choicesContainer">
-        <img
-          src="./assets/536baa79-6a59-46f0-8576-fad690627831_200x200.png"
-          alt="logo"
-        />
+        <h1>Question 1</h1>
         <ul>
-          <li class="choices"><a href="./questions.html">Novo Jogo</a></li>
-          <li class="choices">Configurações</li>
-          <li class="choices">Sair</li>
+          <li class="choices">Answer 1</li>
+          <li class="choices">Answer 2</li>
+          <li class="choices">Answer 3</li>
+          <li class="choices">Answer 4</li>
         </ul>
+        <div id="progressBar">
+          <div class="myBar">
+            <div id="progress1" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress2" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress3" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress4" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress5" class="myProgress"></div>
+          </div>
+        </div>
+
+        <button id="nextButton" class="mb-1">Next Question</button>
       </div>
 
       <svg
@@ -110,6 +126,6 @@
       </svg>
     </div>
 
-    <script src="./assets/js/menu.js" async defer></script>
+    <script src="./assets/js/trivia.js" async defer></script>
   </body>
 </html>
