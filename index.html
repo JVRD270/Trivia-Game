@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Trivia Game Demo</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./assets/js/lib/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/trivia.css" />
+    <link rel="stylesheet" href="./circle.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div id="choicesContainer">
+        <h1>Question 1</h1>
+        <ul>
+          <li class="choices">Answer 1</li>
+          <li class="choices">Answer 2</li>
+          <li class="choices">Answer 3</li>
+          <li class="choices">Answer 4</li>
+        </ul>
+        <div id="progressBar">
+          <div class="myBar">
+            <div id="progress1" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress2" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress3" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress4" class="myProgress"></div>
+          </div>
+          <div class="myBar">
+            <div id="progress5" class="myProgress"></div>
+          </div>
+        </div>
+
+        <button id="nextButton" class="mb-1">Next Question</button>
+      </div>
+
+      <svg
+        class="dodecagon-cw"
+        width="130vh"
+        height="110vw"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="min-width: 520px;
+        min-height: 520px;"
+      >
+        <polygon
+          style="fill:rgb(196, 240, 178);"
+          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
+        />
+      </svg>
+
+      <svg
+        class="dodecagon-ccw"
+        width="127vh"
+        height="107vw"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="min-width: 490px;
+        min-height: 490px;"
+      >
+        <polygon
+          style="fill:rgb(0, 0, 0);"
+          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
+        />
+      </svg>
+
+      <svg
+        class="dodecagon-cw"
+        width="124vh"
+        height="104vw"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="min-width: 460px;
+        min-height: 460px;"
+      >
+        <polygon
+          style="fill:rgb(204, 231, 106);"
+          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
+        />
+      </svg>
+
+      <svg
+        class="dodecagon-ccw"
+        width="121vh"
+        height="101vw"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="min-width: 430px;
+        min-height: 430px;"
+      >
+        <polygon
+          style="fill:rgb(236, 228, 228);"
+          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
+        />
+      </svg>
+
+      <svg
+        class="dodecagon-ccw"
+        width="112vh"
+        height="98vw"
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.1"
+        style="min-width: 400px;
+        min-height: 400px;"
+      >
+        <polygon
+          style="stroke:rgb(0, 0, 0); fill:none;stroke-width: 2px;"
+          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
+        />
+      </svg>
+    </div>
+
+    <script src="./assets/js/trivia.js" async defer></script>
+  </body>
+</html>

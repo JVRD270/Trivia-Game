@@ -1,0 +1,56 @@
+html {
+  height: 95vh;
+  width: 97vw;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  width: 99%;
+  align-items: center;
+}
+
+svg {
+  position: absolute;
+  min-width: 600px;
+  min-height: 600px;
+}
+
+.dodecagon-cw {
+  animation-name: rotation-cw;
+  animation-duration: 1200s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotation-cw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(36000deg);
+  }
+}
+
+.dodecagon-ccw {
+  animation-name: rotation-ccw;
+  animation-duration: 1600s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes rotation-ccw {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-36000deg);
+  }
+}

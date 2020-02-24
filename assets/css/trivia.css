@@ -1,0 +1,130 @@
+body {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  background-color: rgb(51, 34, 58) !important;
+}
+
+div#progressBar {
+  width: 100%;
+}
+
+#choicesContainer {
+  background-color: rgb(255, 255, 255);
+  border: 4px solid rgb(0, 0, 0, 0.05);
+  border-radius: 25px;
+  height: 55vh;
+  width: 65vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+  min-height: 220px;
+  max-height: 95vw;
+  max-width: 80vh;
+  min-width: 250px;
+  box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.4);
+}
+
+#choicesContainer h1 {
+  font-size: 140%;
+  width: 25vw;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  width: 60%;
+  margin: 0 auto;
+}
+
+.choices {
+  font-size: calc(5vw+5vh);
+  margin-top: 2%;
+  padding: 2%;
+  border-radius: 10px;
+  border: solid transparent;
+  transition: all 0.3s;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  min-width: 120px;
+}
+
+.choices:hover {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.correctAnswer {
+  background-color: lightgreen;
+}
+
+.correctAnswer:hover {
+  background-color: lightgreen;
+}
+
+.wrongAnswer {
+  background-color: rgb(221, 73, 73);
+}
+
+.wrongAnswer:hover {
+  background-color: rgb(221, 73, 73);
+}
+
+.myBar {
+  border-radius: 5px;
+  display: inline-block;
+  width: 4vw;
+  height: 0.5rem;
+  background-color: lightgray;
+  max-width: 13vh;
+}
+
+.myProgress {
+  height: 100%;
+  width: 0;
+  transition: all 2s;
+  padding: 1%;
+}
+
+.addPoint {
+  border-radius: 5px;
+  background-color: green;
+  width: 100%;
+}
+
+#nextButton {
+  opacity: 0;
+  transition: all 2s;
+  display: none;
+  width: 50%;
+  margin: 0 auto;
+}
+
+.slideOut {
+  animation-name: slideOut;
+  animation-duration: 2s;
+}
+
+@keyframes slideOut {
+  5% {
+    width: 25rem;
+  }
+  50% {
+    transform: translateX(-2000px);
+  }
+
+  51% {
+    transform: translateY(1300px);
+  }
+
+  52% {
+    transform: translateX(1300px);
+  }
+
+  100% {
+    transform: translateX(0px);
+  }
+}
