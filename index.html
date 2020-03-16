@@ -3,146 +3,232 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Trivia Game Demo</title>
+    <title></title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./assets/js/lib/jquery-2.1.4.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/trivia.css" />
-    <link rel="stylesheet" href="./assets/css/dodecagon.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     />
+    <link rel="stylesheet" href="./assets/css/trivia.css" />
+    <link rel="stylesheet" href="./assets/css/wheel.css" />
+    <link rel="stylesheet" href="https://use.typekit.net/hrh6oua.css" />
   </head>
   <body>
-    <div id="circle"></div>
-
-    <div class="menuContainer">
-      <div class="wrapper">
-        <div id="mainMenu" class="slider">
-          <img
-            src="./assets/536baa79-6a59-46f0-8576-fad690627831_200x200.png"
-            alt=""
-          />
-          <ul>
-            <li class="menuChoices novoJogo">Novo Jogo</li>
-            <li class="menuChoices configbtn">Configurações</li>
-            <li class="menuChoices exit">Sair</li>
-            <h3 class="loading">
-              Procurando partida...
-              <img
-                class="loadingImg"
-                src="./assets/Double Ring-1.9s-243px (1).gif"
-                alt=""
-              />
-            </h3>
-          </ul>
-        </div>
-        <div id="config" class="slider">
-          <h1>Configurações</h1>
-          <ul>
-            <li class="menuChoices">Alguma coisa</li>
-            <li class="menuChoices">Outra Coisa</li>
-            <li class="menuChoices back">Voltar</li>
-            <h3 class="loading">
-              Procurando partida...
-              <img src="./assets/Double Ring-1.9s-243px (1).gif" alt="" />
-            </h3>
-          </ul>
-        </div>
-        <div id="gameSearch" class="slider">
-          <ul>
-            <li class="menuChoices procurarJogo">Partida Online</li>
-            <li class="menuChoices back">Voltar</li>
-            <h3 class="loading">
-              Procurando partida...
-              <img src="./assets/Double Ring-1.9s-243px (1).gif" alt="" />
-            </h3>
-          </ul>
+    <div class="container">
+      <div class="menuContainer">
+        <div class="inside-border">
+          <div id="mainMenu" class="slider">
+            <img src="./assets/img/logo.png" alt="" />
+            <ul>
+              <li class="menuChoices novoJogo">Novo Jogo</li>
+              <li class="menuChoices configbtn">Configurações</li>
+              <li class="menuChoices exit">Sair</li>
+              <h3 class="loading">
+                Procurando partida...
+                <img
+                  class="loadingImg"
+                  src="./assets/img/Double Ring-1.9s-243px (1).gif"
+                  alt=""
+                />
+              </h3>
+            </ul>
+          </div>
+          <div id="config" class="slider">
+            <h1>Configurações</h1>
+            <ul>
+              <li class="menuChoices">Alguma coisa</li>
+              <li class="menuChoices">Outra Coisa</li>
+              <li class="menuChoices back">Voltar</li>
+              <h3 class="loading">
+                Procurando partida...
+                <img src="./assets/img/Double Ring-1.9s-243px (1).gif" alt="" />
+              </h3>
+            </ul>
+          </div>
+          <div id="gameSearch" class="slider">
+            <ul>
+              <li class="menuChoices procurarJogo">Partida Online</li>
+              <li class="menuChoices back">Voltar</li>
+              <h3 class="loading">
+                Procurando partida...
+                <img src="./assets/img/Double Ring-1.9s-243px (1).gif" alt="" />
+              </h3>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="polygonContainer">
-      <svg
-        class="dodecagon-cw"
-        width="150vh"
-        height="110vw"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="min-width: 520px;
-        min-height: 520px;"
-      >
-        <polygon
-          style="fill:rgb(196, 240, 178);"
-          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
-        />
-      </svg>
+    <div class="playerStats player1">
+      <div class="playerInfo">
+        <img src="./assets/img/blank-profile-picture-973460_1280.png" alt="" />
+        <h5>Dantas</h5>
+      </div>
+      <div class="trophies">
+        <div class="trophy">
+          <img class="PLTrophy" src="./assets/img/PL-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img
+            class="LibTrophy"
+            src="./assets/img/Libertadores-outline.png"
+            alt=""
+          />
+        </div>
+        <div class="trophy">
+          <img class="UCLTrophy" src="./assets/img/UCL-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img class="CWCTrophy" src="./assets/img/cwc-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img class="BRTrophy" src="./assets/img/BR-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img class="WCTrophy" src="./assets/img/wc-outline.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="playerStats player2">
+      <div class="playerInfo">
+        <img src="./assets/img/blank-profile-picture-973460_1280.png" alt="" />
+        <h5>Xande</h5>
+      </div>
+      <div class="trophies">
+        <div class="trophy" style="margin-left: 8px;">
+          <img src="./assets/img/PL-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img src="./assets/img/Libertadores-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img src="./assets/img/UCL-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img src="./assets/img/cwc-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img src="./assets/img/BR-outline.png" alt="" />
+        </div>
+        <div class="trophy">
+          <img src="./assets/img/wc-outline.png" alt="" />
+        </div>
+      </div>
+    </div>
 
-      <svg
-        class="dodecagon-ccw"
-        width="147vh"
-        height="107vw"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="min-width: 490px;
-        min-height: 490px;"
-      >
-        <polygon
-          style="fill:rgb(0, 0, 0);"
-          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
-        />
-      </svg>
+    <div class="gameStuff">
+      <div class="gameContainer">
+        <div id="wheelContainer" class="wrapper">
+          <div class="slider notShowing">
+            <div class="roll">
+              <div class="roll_outer"></div>
+              <div class="clip_l"></div>
+              <div class="clip_r"></div>
+              <div class="clip_t"></div>
+              <div class="clip_b"></div>
+              <div class="inner_shadow"></div>
+              <div class="elip_l"></div>
+              <div class="elip_r"></div>
+              <div class="shine"></div>
+              <div class="roll_inner">
+                <div class="roll_inner__button men-1">
+                  <img
+                    src="./assets/img/pngfind.com-world-cup-trophy-png-6265504.png"
+                    alt=""
+                  />
+                </div>
+                <div class="roll_inner__button men-2">
+                  <img
+                    src="./assets/img/Premier_league_trophy_icon_(adjusted).png"
+                    alt=""
+                  />
+                </div>
+                <div class="roll_inner__button men-3">
+                  <img
+                    style="height: 100%; margin-left: 34%;"
+                    src="./assets/img/worldcup.png"
+                    alt=""
+                  />
+                </div>
+                <div class="roll_inner__button men-4">
+                  <img
+                    src="./assets/img/200px-Liga_Brasileira_(2014-).png"
+                    alt=""
+                  />
+                </div>
+                <div class="roll_inner__button men-5">
+                  <img
+                    src="./assets/img/champions-league-trophy-png-2.png"
+                    alt=""
+                  />
+                </div>
+                <div class="roll_inner__button men-6">
+                  <img
+                    style="height: 100%"
+                    src="./assets/img/libertadores.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <button class="wheelBtn" data-label="Rodar!">Spin!</button>
+            </div>
+          </div>
+        </div>
+        <div id="choicesContainer" class="wrapper">
+          <div class="slider notShowing">
+            <ul>
+              <h1>Question 1</h1>
+              <li class="choices">Answer 1</li>
+              <li class="choices">Answer 2</li>
+              <li class="choices">Answer 3</li>
+              <li class="choices">Answer 4</li>
 
-      <svg
-        class="dodecagon-cw"
-        width="144vh"
-        height="104vw"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="min-width: 460px;
-        min-height: 460px;"
-      >
-        <polygon
-          style="fill:rgb(204, 231, 106);"
-          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
-        />
-      </svg>
-
-      <svg
-        class="dodecagon-ccw"
-        width="141vh"
-        height="101vw"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="min-width: 430px;
-        min-height: 430px;"
-      >
-        <polygon
-          style="fill:rgb(236, 228, 228);"
-          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
-        />
-      </svg>
-
-      <svg
-        class="dodecagon-ccw"
-        width="130vh"
-        height="98vw"
-        viewBox="0 0 200 200"
-        xmlns="http://www.w3.org/2000/svg"
-        version="1.1"
-        style="min-width: 400px;
-        min-height: 400px;"
-      >
-        <polygon
-          style="stroke:rgb(0, 0, 0); fill:none;stroke-width: 2px;"
-          points="124.846628329842,192.728879323751 75.153371670158,192.728879323751 32.1177490060914,167.882250993909 7.27112067624945,124.846628329842 7.27112067624944,75.153371670158 32.1177490060914,32.1177490060915 75.1533716701579,7.27112067624947 124.846628329842,7.27112067624944 167.882250993909,32.1177490060914 192.728879323751,75.153371670158 192.728879323751,124.846628329842 167.882250993909,167.882250993909"
-        />
-      </svg>
+              <button class="mb-1 nextButton">Próximo</button>
+            </ul>
+          </div>
+        </div>
+        <div id="trophySelection" class="wrapper">
+          <div class="slider notShowing">
+            <div class="trophyBtn PL">
+              <img
+                src="./assets/img/Premier_league_trophy_icon_(adjusted).png"
+                alt=""
+              />
+            </div>
+            <div class="trophyBtn Libertadores">
+              <img src="./assets/img/libertadores.png" alt="" />
+            </div>
+            <div class="trophyBtn UCL">
+              <img
+                src="./assets/img/champions-league-trophy-png-2.png"
+                alt=""
+              />
+            </div>
+            <div class="trophyBtn CWC">
+              <img
+                src="./assets/img/pngfind.com-world-cup-trophy-png-6265504.png"
+                alt=""
+              />
+            </div>
+            <div class="trophyBtn BR">
+              <img
+                src="./assets/img/200px-Liga_Brasileira_(2014-).png"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+        <div id="backToMenuMsg">
+          <div class="slider notShowing">
+            <h2 class="backToMenuH2">
+              Resposta Incorreta! Agora é a vez do seu adversário!
+            </h2>
+            <button class="backToMenuBtn">Voltar ao Menu</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="./assets/js/trivia.js" async defer></script>

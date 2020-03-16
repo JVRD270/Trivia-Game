@@ -1,19 +1,124 @@
 var mainMenu = $("#mainMenu");
 var config = $("#config");
 var gameSearch = $("#gameSearch");
-var currentSlide = mainMenu;
+var currentMenu = mainMenu;
+var bigMenu = $(".menuContainer");
+var gameMenu = $(".gameContainer");
+var points = 0;
+var choices = $(".choices");
+var answerChosen = false;
+var rightChoice;
+var wheelSlide = $("#wheelContainer .slider");
+var questionSlide = $("#choicesContainer .slider");
+var backToMenuSlide = $("#backToMenuMsg .slider");
+var trophySelectionSlide = $("#trophySelection .slider");
+var WCselectionSlide = $("#WCselection .slider");
+var currentSlide;
+var nextSlide = wheelSlide;
+var options = ["option 1", "option 2", "option 3", "option 4"];
+var themeChosen = false;
+var trophyChosen;
+var trophyCount = 0;
+var menuOpen = true;
+var backToMenu = false;
 
-jQuery(window).load(function() {
-  if (sessionStorage.getItem("inGame") == "true") {
-    $("#circle").css("z-index", "400");
-    circleShrink();
-    sessionStorage.setItem("inGame", "false");
-  } else {
-    $("#circle")
-      .css("width", "30px")
-      .css("height", "30px");
+function Player(username, profilePic, trofeus, pontos) {
+  this.username = username;
+  this.profilePic = profilePic;
+  this.trofeus = trofeus;
+  this.pontos = pontos;
+}
+
+var samplePlayer1 = new Player(
+  "Dantas",
+  "./assets/img/blank-profile-picture-973460_1280.png",
+  ["UCL", "Libertadores"],
+  2
+);
+var samplePlayer1 = new Player(
+  "Xande",
+  "./assets/img/blank-profile-picture-973460_1280.png",
+  ["BR", "Mundial", "UCL"],
+  1
+);
+
+function Question(theme, question, arrOfAnswers, img) {
+  this.theme = theme;
+  this.question = question;
+  this.options = arrOfAnswers;
+  this.image = img;
+  this.correctAnswer = arrOfAnswers[0];
+  this.randomize = function() {
+    shuffle(arrOfAnswers);
+    return arrOfAnswers;
+  };
+}
+
+var wcQ = new Question(
+  "Copa do Mundo",
+  "Quem venceu a Copa do Mundo de 1938?",
+  ["Itália", "Alemanha", "Brasil", "Uruguai"]
+);
+
+var LibertadoresQ = new Question(
+  "Libertadores",
+  "Quem ganhou a Libertadores de 1967?",
+  ["Racing de Avellaneda", "Santos", "Peñarol", "Independiente de Avellaneda"]
+);
+
+var CincoGLQ = new Question(
+  "ligas",
+  "Qual o maior vencedor do campeonato Francês?",
+  [
+    "Saint-Etiénne",
+    "Olympique Lyonnais",
+    "Olympique De Marseille",
+    "Paris Saint-Germain"
+  ]
+);
+
+var UCLQ = new Question(
+  "UCL",
+  "Qual destes clubes já venceu uma liga dos campeões?",
+  ["Celtic Glasgow", "Arsenal-ING", "Atlético de Madrid", "Manchester City"]
+);
+
+var WorldQ = new Question("Rest of World", "Qual clube Zico treina no Japão?", [
+  "Kashima Antlers",
+  "Yokohama Marinos",
+  "Vissel Kobe",
+  "Gamba Osaka"
+]);
+
+var BrQ = new Question(
+  "Brasileiro",
+  "Quantas vezes o Grêmio foi campeão de torneios nacionais da primeira divisão?",
+  ["8", "5", "2", "7"]
+);
+
+var currentQuestion = UCLQ;
+var nextQuestion = LibertadoresQ;
+var questions = [CincoGLQ, LibertadoresQ, WorldQ, UCLQ, BrQ, wcQ];
+
+function shuffle(arr) {
+  for (var i = arr.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
   }
-});
+  return arr;
+}
+
+function setQuestion(Question) {
+  $("h1").text(Question.question);
+  var choices = Question.randomize();
+  for (i = 1; i < 5; i++) {
+    var li = $("#choicesContainer li:nth-of-type(" + i + ")");
+    li.text(choices[i - 1]);
+  }
+  rightChoice = Question.correctAnswer;
+}
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,76 +128,446 @@ jQuery(window).load(function() {
 
 $(".menuChoices").on("click", function() {
   if ($(this).hasClass("configbtn")) {
-    nextSlide(config);
+    nextMenu(config);
   } else if ($(this).hasClass("novoJogo")) {
-    nextSlide(gameSearch);
+    nextMenu(gameSearch);
   }
 });
 
 $(".menuChoices").on("click", function() {
   if ($(this).hasClass("back")) {
-    previousSlide(mainMenu);
+    previousMenu(mainMenu);
   } else if ($(this).hasClass("procurarJogo")) {
-    setTimeout(circleGrow(), 3000);
+    $(".loading").css("display", "block");
+    setTimeout(function() {
+      $(".player1").addClass("slideInPlayer1");
+      $(".player2").addClass("slideInPlayer2");
+      $(".player1").removeClass("slideOutPlayer1");
+      $(".player2").removeClass("slideOutPlayer2");
+      $(".loading").css("display", "none");
+    }, 3500);
+    setTimeout(function() {
+      mainMenu.toggleClass("fadeOut");
+      gameSearch.toggleClass("fadeOut");
+      config.toggleClass("fadeOut");
+      setTimeout(function() {
+        bigMenu.toggleClass("close");
+      }, 200);
+      setTimeout(function() {
+        bigMenu.css("z-index", "-1");
+      }, 1000);
+      nextPage();
+    }, 3000);
   }
 });
 
-function circleGrow() {
-  $("h3").css("display", "block");
-  setTimeout(function() {
-    $("h3").text("Partida Encontrada!");
-  }, 2000);
-  setTimeout(function() {
-    $("#circle").css("z-index", "10");
-    $("#circle").animate({ width: "3000", height: "3000" }, 2000);
-  }, 3000);
+function reset() {
+  $(".nextButton").css("display", "none");
+  $(".choices")
+    .removeClass("correctAnswer")
+    .removeClass("wrongAnswer");
+  answerChosen = false;
 }
 
-function circleShrink() {
-  $("#circle").animate({ width: "30", height: "30" }, 1500);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function nextMenu(newMenu) {
+  currentMenu.addClass("slideOutLeft");
+
   setTimeout(function() {
-    $("#circle").css("z-index", "0");
+    currentMenu.css("display", "none");
+    newMenu.css("display", "flex");
+    newMenu.addClass("slideInLeft");
+    currentMenu.css("pointer-events", "none");
+  }, 50);
+  setTimeout(function() {
+    newMenu.removeClass("slideInLeft");
+    currentMenu.removeClass("slideOutLeft");
   }, 800);
+  setTimeout(function() {
+    currentMenu = newMenu;
+    currentMenu.css("pointer-events", "all");
+  }, 810);
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-function nextSlide(newSlide) {
-  currentSlide.addClass("slideOutLeft");
-
+function previousMenu(previousMenu) {
+  currentMenu.addClass("slideOutRight");
   setTimeout(function() {
-    currentSlide.css("display", "none");
-    newSlide.css("display", "flex");
-    newSlide.addClass("slideInLeft");
-    currentSlide.css("pointer-events", "none");
+    currentMenu.css("display", "none");
+    previousMenu.css("display", "flex");
+    previousMenu.addClass("slideInRight");
+    currentMenu.css("pointer-events", "none");
   }, 50);
   setTimeout(function() {
-    newSlide.removeClass("slideInLeft");
-    currentSlide.removeClass("slideOutLeft");
-  }, 500);
+    previousMenu.removeClass("slideInRight");
+    currentMenu.removeClass("slideOutRight");
+  }, 800);
   setTimeout(function() {
-    currentSlide = newSlide;
-    currentSlide.css("pointer-events", "all");
-  }, 510);
+    currentMenu = previousMenu;
+    currentMenu.css("pointer-events", "all");
+  }, 810);
 }
 
-function previousSlide(previousSlide) {
-  currentSlide.addClass("slideOutRight");
-  setTimeout(function() {
-    currentSlide.css("display", "none");
-    previousSlide.css("display", "flex");
-    previousSlide.addClass("slideInRight");
-    currentSlide.css("pointer-events", "none");
-  }, 50);
-  setTimeout(function() {
-    previousSlide.removeClass("slideInRight");
-    currentSlide.removeClass("slideOutRight");
-  }, 500);
-  setTimeout(function() {
-    currentSlide = previousSlide;
-    currentSlide.css("pointer-events", "all");
-  }, 510);
+function changeMenu() {}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//QUESTIONS CODE
+
+// //Adds points, makes right answer green when selected, makes wrong answers red, makes "next question" button show up
+$(".choices").on("click", function() {
+  //Making sure only 1 answer is chosen per question
+  if (answerChosen === false) {
+    if (!$(this).hasClass("correctAnswer") && $(this).text() === rightChoice) {
+      points++;
+      if (points === 3) {
+        if (trophyCount === 5) {
+          nextSlide = WCselectionSlide;
+        } else {
+          nextSlide = trophySelectionSlide;
+        }
+      } else if (points === 4) {
+        addTrophy(trophyChosen);
+        points = 0;
+        nextSlide = wheelSlide;
+        $("#progress1").removeClass("addPoint");
+        $("#progress2").removeClass("addPoint");
+        $("#progress3").removeClass("addPoint");
+        trophyCount++;
+      }
+      answerChosen = true;
+      $(this).addClass("correctAnswer");
+      $("#progress" + points.toString()).addClass("addPoint");
+      $(".nextButton").css("display", "block");
+      $(".nextButton").animate(
+        {
+          opacity: 1
+        },
+        20
+      );
+    }
+    //If it's wrong, make it red
+    else {
+      $(this).addClass("wrongAnswer");
+      answerChosen = true;
+      nextSlide = backToMenuSlide;
+      if (points === 3) {
+        $.each(trophies, function(index) {
+          if (trophyChosen === trophies[index]) {
+            $(
+              ".trophyBtn:nth-of-type(" + (index + 1).toString() + ")"
+            ).addClass("resetTrophyColors");
+          }
+        });
+      }
+      $(".nextButton").css("display", "block");
+      $(".nextButton").animate(
+        {
+          opacity: 1
+        },
+        20
+      );
+    }
+  }
+});
+
+$(".nextButton").on("click", function() {
+  console.log("clicked");
+  nextPage();
+  setTimeout(reset(), 150);
+  $(this).css("opacity", "0");
+  $(this).css("display", "none");
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//WHEEL CODE
+
+var rot = 0;
+var spinCounter = 0;
+var roll = document.getElementsByClassName("roll_inner")[0];
+var rollContaerin = document.getElementsByClassName("roll")[0];
+var btn = $(".wheelBtn");
+var spinDelay = 2;
+var interval;
+var random = Math.ceil(Math.random() * 6) * 60;
+var colors = [
+  "rgb(26, 59, 128)",
+  "rgb(7, 174, 255)",
+  "rgb(23, 35, 34)",
+  "rgb(222, 22, 59)",
+  "rgb(0, 89, 168)",
+  "rgb(253, 43, 124"
+];
+
+var spinFunction = function() {
+  clearInterval(interval);
+  roll.style.transform = "rotateX(" + (rot + random + "deg)");
+  rot = rot + 60;
+  spinCounter++;
+
+  spinDelay = parseInt(Math.log(spinCounter) * Math.log(spinCounter) * 15, 10);
+  console.log(spinDelay);
+
+  if (spinDelay < 200) {
+    interval = setInterval(spinFunction, spinDelay);
+  } else {
+    if (random === 1 * 60) {
+      // $("body").css("background-color", colors[0]);
+      currentQuestion = WorldQ;
+    } else if (random === 2 * 60) {
+      // $("body").css("background-color", colors[5]);
+      currentQuestion = LibertadoresQ;
+    } else if (random === 3 * 60) {
+      // $("body").css("background-color", colors[4]);
+      currentQuestion = UCLQ;
+    } else if (random === 4 * 60) {
+      // $("body").css("background-color", colors[3]);
+      currentQuestion = BrQ;
+    } else if (random === 5 * 60) {
+      // $("body").css("background-color", colors[2]);
+      currentQuestion = wcQ;
+    } else if (random === 6 * 60) {
+      // $("body").css("background-color", colors[1]);
+      currentQuestion = CincoGLQ;
+    }
+    rollContaerin.classList.add("active");
+    btn.removeClass("loading");
+    btn.removeAttr("disabled");
+  }
+};
+
+var loading = function(e) {
+  if (themeChosen === false) {
+    e.preventDefault();
+    e.stopPropagation();
+    e.target.classList.add("loading");
+    e.target.setAttribute("disabled", "disabled");
+    rollContaerin.classList.remove("active");
+    rot = 0;
+    spinDelay = 2;
+    spinCounter = 0;
+    interval = setInterval(spinFunction, spinDelay);
+    setTimeout(function() {
+      btn.attr("data-label", "Seguir");
+    }, 200);
+  } else {
+    nextPage();
+    setTimeout(function() {
+      btn.attr("data-label", "Rodar!");
+    }, 200);
+  }
+  themeChosen = !themeChosen;
+  random = Math.ceil(Math.random() * 6) * 60;
+};
+
+btn.on("click", loading);
+
+function nextPage() {
+  var displaySlide = currentSlide;
+  $(currentSlide).addClass("slideOutLeft");
+  if (menuOpen) {
+    if (points == 3) {
+      nextSlide = trophySelectionSlide;
+    }
+    setTimeout(function() {
+      nextSlide.toggleClass("notShowing");
+      nextSlide.addClass("slideInLeft");
+      $(" .wrapper").css("pointer-events", "none");
+      nextSlide.parent().css("z-index", "100");
+    }, 800);
+    setTimeout(function() {
+      if (currentSlide) {
+        currentSlide.removeClass("slideOutLeft");
+      }
+      nextSlide.removeClass("slideInLeft");
+      $(".wrapper").css("pointer-events", "all");
+      $(".wrapper").css("pointer-events", "all");
+    }, 1650);
+    setTimeout(function() {
+      currentSlide = nextSlide;
+      nextSlide = questionSlide;
+    }, 1750);
+    menuOpen = !menuOpen;
+  } else {
+    if (backToMenu) {
+      setTimeout(function() {
+        currentSlide.toggleClass("notShowing");
+        $(" .wrapper").css("pointer-events", "none");
+        nextSlide.parent().css("z-index", "100");
+        nextSlide = wheelSlide;
+      }, 700);
+      setTimeout(function() {
+        currentSlide.removeClass("slideOutLeft");
+        $(".wrapper").css("pointer-events", "all");
+        $(".wrapper").css("pointer-events", "all");
+      }, 750);
+      menuOpen = !menuOpen;
+      backToMenu = !backToMenu;
+    } else {
+      setTimeout(function() {
+        setQuestion(currentQuestion);
+        currentSlide.removeClass("slideOutLeft");
+        currentSlide.toggleClass("notShowing");
+        nextSlide.toggleClass("notShowing");
+        nextSlide.addClass("slideInLeft");
+        $(" .wrapper").css("pointer-events", "none");
+        currentSlide.parent().css("z-index", "-1");
+        nextSlide.parent().css("z-index", "100");
+      }, 400);
+      setTimeout(function() {
+        nextSlide.removeClass("slideInLeft");
+        $(".wrapper").css("pointer-events", "all");
+        $(".wrapper").css("pointer-events", "all");
+      }, 1200);
+      setTimeout(function() {
+        currentSlide = nextSlide;
+        nextSlide = displaySlide;
+      }, 1300);
+    }
+  }
 }
+
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+
+let trophies = [
+  "PLTrophy",
+  "LibTrophy",
+  "UCLTrophy",
+  "CWCTrophy",
+  "BRTrophy",
+  "WCTrophy"
+];
+
+function addTrophy(trophy) {
+  if ($("." + trophy).hasClass("addTrophy")) {
+    return 0;
+  } else if (trophy === trophies[0]) {
+    $("." + trophy).addClass("addTrophy");
+    $("." + trophy).attr(
+      "src",
+      "./assets/img/Premier_league_trophy_icon_(adjusted).png"
+    );
+  } else if (trophy === trophies[1]) {
+    $("." + trophy).addClass("addTrophy");
+
+    $("." + trophy).attr("src", "./assets/img/libertadores.png");
+  } else if (trophy === trophies[2]) {
+    $("." + trophy).addClass("addTrophy");
+
+    $("." + trophy).attr(
+      "src",
+      "./assets/img/champions-league-trophy-png-2.png"
+    );
+  } else if (trophy === trophies[3]) {
+    $("." + trophy).addClass("addTrophy");
+
+    $("." + trophy).attr(
+      "src",
+      "./assets/img/pngfind.com-world-cup-trophy-png-6265504.png"
+    );
+  } else if (trophy === trophies[4]) {
+    $("." + trophy).addClass("addTrophy");
+
+    $("." + trophy).attr(
+      "src",
+      "./assets/img/200px-Liga_Brasileira_(2014-).png"
+    );
+  } else if (trophy === trophies[5]) {
+    $("." + trophy).addClass("addTrophy");
+
+    $("." + trophy).attr("src", "./assets/img/worldcup.png");
+  }
+}
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+// Trophy selection page
+
+$(".trophyBtn").on("click", function() {
+  $(this).removeClass("resetTrophyColors");
+  if ($(this).hasClass("PL")) {
+    $(this).css("background-color", colors[1]);
+    $("body").css("background-color", colors[1]);
+    trophyChosen = trophies[0];
+    currentQuestion = CincoGLQ;
+    $(this).css("pointer-events", "none");
+  } else if ($(this).hasClass("Libertadores")) {
+    $(this).css("background-color", colors[5]);
+    $("body").css("background-color", colors[5]);
+    trophyChosen = trophies[1];
+    currentQuestion = LibertadoresQ;
+    $(this).css("pointer-events", "none");
+  } else if ($(this).hasClass("UCL")) {
+    $(this).css("background-color", colors[4]);
+    $("body").css("background-color", colors[4]);
+    trophyChosen = trophies[2];
+    currentQuestion = UCLQ;
+    $(this).css("pointer-events", "none");
+  } else if ($(this).hasClass("CWC")) {
+    $(this).css("background-color", colors[0]);
+    $("body").css("background-color", colors[0]);
+    trophyChosen = trophies[3];
+    currentQuestion = WorldQ;
+    $(this).css("pointer-events", "none");
+  } else if ($(this).hasClass("BR")) {
+    $(this).css("background-color", colors[3]);
+    $("body").css("background-color", colors[3]);
+    trophyChosen = trophies[4];
+    currentQuestion = BrQ;
+    $(this).css("pointer-events", "none");
+  } else if ($(this).hasClass("WC")) {
+    $(this).css("background-color", colors[2]);
+    $("body").css("background-color", colors[2]);
+    trophyChosen = trophies[5];
+    currentQuestion = wcQ;
+    $(this).css("pointer-events", "none");
+  }
+  nextSlide = questionSlide;
+  setTimeout(function() {
+    nextPage();
+  }, 500);
+});
+
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+//////////////////////////////////////////////
+// Back to Menu
+
+$(".backToMenuBtn").click(function() {
+  nextMenu(mainMenu);
+  bigMenu.css("z-index", "100");
+  bigMenu.toggleClass("close");
+  bigMenu.toggleClass("open");
+  mainMenu.toggleClass("fadeOut");
+  gameSearch.toggleClass("fadeOut");
+  config.toggleClass("fadeOut");
+  mainMenu.toggleClass("fadeIn");
+  gameSearch.toggleClass("fadeIn");
+  config.toggleClass("fadeIn");
+  backToMenu = true;
+  nextPage();
+  setTimeout(function() {
+    bigMenu.removeClass("open");
+    mainMenu.removeClass("fadeIn");
+    gameSearch.removeClass("fadeIn");
+    config.removeClass("fadeIn");
+  }, 900);
+  $(".player1").addClass("slideOutPlayer1");
+  $(".player2").addClass("slideOutPlayer2");
+  setTimeout(function() {
+    $(".player1").removeClass("slideInPlayer1");
+    $(".player1").removeClass("slideInPlayer2");
+  }, 1000);
+});

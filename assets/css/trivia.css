@@ -1,76 +1,111 @@
-body {
+body,
+html {
   text-align: center;
+  height: 100%;
   /* display: flex;
   justify-content: center; */
-  background-color: rgb(51, 34, 58) !important;
+  background-image: url("../img/Comp\ 1.gif");
+  background-size: 100%;
+  overflow: hidden;
+  font-family: "shimano-narrow-round", sans-serif;
+  font-size: larger;
 }
 
-#circle {
-  display: block;
-  position: absolute;
-  background-color: rgb(236, 228, 228);
-  height: 3000px;
-  width: 3000px;
-  border-radius: 50%;
-  z-index: 400;
-  top: -200px;
-  bottom: -200px;
-  left: -200px;
-  right: -200px;
-  margin: auto;
+.container {
+  height: 100%;
 }
 
 .menuContainer {
-  position: relative;
-  z-index: 2;
-  margin: 0 auto;
-  width: 50%;
   height: 100%;
-  min-height: 300px;
-  min-width: 300px;
-}
-
-.polygonContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-height: 110vw;
-  max-width: 150vh;
-  min-width: 400px;
-  min-height: 400px;
+  width: 40%;
+  margin: auto;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   margin: auto;
-}
-
-div#progressBar {
-  width: 100%;
-}
-
-.wrapper {
+  background-color: rgb(0, 138, 138);
   overflow: hidden;
-  background-color: transparent;
-  border-radius: 25px;
-  height: 80%;
-  width: 80%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  z-index: 2;
-  max-height: 105vw;
-  max-width: 90vh;
-  min-width: 300px;
-  min-height: 300px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: auto;
+  z-index: 1000;
+}
+
+#mainMenu img {
+  margin-bottom: 15%;
+}
+
+.inside-border {
+  height: 100%;
+  width: 95%;
+  border-left: 5px solid rgb(255, 255, 255, 0.8);
+  border-right: 5px solid rgb(255, 255, 255, 0.8);
+  margin: 0 auto;
+}
+
+.inside-border .slider {
+  padding: 10%;
+}
+
+.close {
+  animation-name: close;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+
+.open {
+  animation-name: open;
+  animation-duration: 0.6s;
+  animation-fill-mode: forwards;
+}
+
+.fadeOut {
+  animation-name: fadeOut;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes close {
+  from {
+    width: 40%;
+  }
+
+  to {
+    width: 0;
+  }
+}
+
+@keyframes open {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 40%;
+  }
 }
 
 .slider {
@@ -80,23 +115,24 @@ div#progressBar {
   right: 0;
   bottom: 0;
   margin: auto;
-  width: 100%;
-  height: 100%;
+  width: 700px;
+  height: 720px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.slider img {
-  margin: 0 auto 0 auto;
-  width: 45%;
+.wrapper {
+  z-index: 0;
+  width: 40%;
+  height: 60%;
 }
 
 #config {
   pointer-events: none;
   display: none;
-  height: 30%;
+  height: 60%;
 }
 
 #config h1 {
@@ -120,95 +156,201 @@ div#progressBar {
 h3 {
   font-size: 120%;
   display: none;
+  color: snow;
 }
 
 ul {
   list-style: none;
   padding: 0;
+  height: 40%;
   width: 100%;
-  margin: auto;
   max-width: 50vw;
   align-items: center;
 }
 
 li {
-  margin: 0 auto;
+  color: black;
+  margin: auto;
   margin-top: 3%;
   border-radius: 10px;
-  border: solid transparent;
   transition: all 0.3s;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
-  width: 80%;
+  width: 100%;
+  background-color: snow;
+  font-size: 140%;
 }
 
-li:hover {
-  background-color: rgb(0, 0, 0, 0.3);
+.menuContainer li {
+  color: snow;
+  margin: auto;
+  margin-top: 3%;
+  border-radius: 40px;
+  border: 2px solid snow;
+  transition: all 0.3s;
+  width: 100%;
+  height: 30%;
+  background-color: rgb(255, 154, 60);
+  font-size: 140%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.menuContainer li:hover {
+  background-color: rgb(0, 0, 0, 0.6);
+}
+
+.playerStats {
+  width: 400px;
+  height: 300px;
+  background-color: snow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 150;
+}
+
+.playerStats.player1 {
+  border-radius: 0px 15px 15px 0px;
+  float: left;
+  margin: auto 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -25%;
+}
+
+.playerStats.player2 {
+  border-radius: 15px 0px 0px 15px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: -25%;
+  margin: auto 0;
+}
+
+.slideInPlayer1 {
+  animation-name: slideInPlayer1;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.slideInPlayer2 {
+  animation-name: slideInPlayer2;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.slideOutPlayer1 {
+  animation-name: slideOutPlayer1;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.slideOutPlayer2 {
+  animation-name: slideOutPlayer2;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.playerInfo img {
+  margin-top: 5%;
+  width: 20%;
+  border-radius: 50%;
+}
+
+.trophies {
+  box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+  height: 40%;
+  margin: auto;
+  border-radius: 10%;
+  display: flex;
+  justify-content: center;
+  width: 70%;
+  padding-left: 12px;
+}
+
+.trophy {
+  width: 45px;
+}
+
+.trophies img {
+  margin-top: 25px;
+  height: 50%;
+  border-radius: 0%;
+  transform: rotate(0deg);
+}
+
+@keyframes slideInPlayer1 {
+  from {
+    left: -25%;
+  }
+  to {
+    left: 0;
+  }
+}
+
+@keyframes slideInPlayer2 {
+  from {
+    right: -25%;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideOutPlayer1 {
+  from {
+    left: 0%;
+  }
+  to {
+    left: -25%;
+  }
+}
+
+@keyframes slideOutPlayer2 {
+  from {
+    right: 0%;
+  }
+  to {
+    right: -25%;
+  }
 }
 
 .slideInLeft {
   animation-name: slideInLeft;
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-fill-mode: forwards;
 }
 
 .slideOutLeft {
   animation-name: slideOutLeft;
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-fill-mode: forwards;
 }
 
 .slideInRight {
   animation-name: slideInRight;
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-fill-mode: forwards;
 }
 
 .slideOutRight {
   animation-name: slideOutRight;
-  animation-duration: 0.5s;
+  animation-duration: 0.8s;
   animation-fill-mode: forwards;
 }
 
 @keyframes slideInLeft {
-  0% {
+  from {
     transform: translateX(1500px);
   }
-  100% {
+  to {
     transform: translateX(0px);
   }
 }
 
 @keyframes slideOutLeft {
-  5% {
-    width: 25rem;
-  }
-  90% {
-    transform: translateX(-2000px);
-  }
-
-  95% {
-    transform: translateY(1300px);
-  }
-
-  100% {
-    transform: translateX(1300px);
-  }
-}
-
-@keyframes slideInLeft {
-  0% {
-    transform: translateX(1500px);
-  }
-  100% {
-    transform: translateX(0px);
-    transform: translateY(0px);
-  }
-}
-
-@keyframes slideOutLeft {
-  5% {
-    width: 25rem;
-  }
   90% {
     transform: translateX(-2000px);
   }
@@ -233,9 +375,6 @@ li:hover {
 }
 
 @keyframes slideOutRight {
-  5% {
-    width: 25rem;
-  }
   90% {
     transform: translateX(2000px);
   }
@@ -247,4 +386,165 @@ li:hover {
   100% {
     transform: translateX(-1300px);
   }
+}
+
+#trophySelection {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  margin-top: 5%;
+  text-align: center;
+  z-index: -1;
+  width: 800px;
+}
+
+#WCselection {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: 0 auto;
+  text-align: center;
+  z-index: -1;
+}
+
+#trophySelection .slider {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  width: 800px;
+  overflow: visible;
+}
+
+#WCselection .slider {
+  display: block;
+  margin: 10% auto;
+  text-align: center;
+}
+
+#WCselection .slider img {
+  margin-left: 23px;
+}
+
+#WCselection .trophyBtn {
+  margin-top: 35%;
+}
+
+.trophyBtn {
+  display: inline-block;
+  height: 300px;
+  width: 300px;
+  background-color: white;
+  border-radius: 10%;
+  transition: all 0.5s;
+  margin: 1%;
+  padding: 1%;
+}
+
+.trophyBtn img {
+  transform: rotate(0deg);
+  margin-top: 12%;
+  height: 85%;
+}
+
+.trophyBtn:hover {
+  background-color: rgba(220, 220, 220, 0.5);
+}
+
+.resetTrophyColors {
+  background-color: white !important;
+}
+
+.resetTrophyColors:hover {
+  background-color: rgba(220, 220, 220, 0.5) !important;
+}
+
+.gameStuff {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.gameContainer {
+  width: 100%;
+  height: 100%;
+}
+
+#choicesContainer {
+  flex-direction: column;
+  justify-content: center;
+  z-index: -1;
+}
+
+#choicesContainer h1 {
+  font-size: 160%;
+  width: 100%;
+  height: 40%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: snow;
+  border-radius: 20px 0px;
+  padding: 15px;
+}
+
+#choicesContainer li:hover {
+  background-color: rgb(255, 255, 255, 0.3);
+}
+
+.correctAnswer {
+  background-color: lightgreen;
+}
+
+.correctAnswer:hover {
+  background-color: lightgreen !important;
+}
+
+.wrongAnswer {
+  background-color: rgb(221, 73, 73);
+}
+
+.wrongAnswer:hover {
+  background-color: rgb(221, 73, 73) !important;
+}
+
+.nextButton {
+  opacity: 0;
+  transition: all 2s;
+  display: none;
+  width: 50%;
+  margin: auto;
+  margin-top: 5%;
+  position: relative;
+  z-index: 10;
+}
+
+.backToMenuH2 {
+  width: 200%;
+  font-size: 400%;
+  font-weight: bold;
+  color: snow;
+}
+
+.notShowing {
+  display: none !important;
+  z-index: -1 !important;
+}
+
+button {
+  background-color: rgb(255, 154, 60);
+  border: none;
+  border-radius: 15px;
+  width: 80%;
+  margin-top: 15%;
 }
