@@ -1,3 +1,5 @@
+document.html.style.zoom = 0.67;
+
 var mainMenu = $("#mainMenu");
 var config = $("#config");
 var gameSearch = $("#gameSearch");
