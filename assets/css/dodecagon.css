@@ -1,22 +1,17 @@
-html {
-  height: 95vh;
-  width: 97vw;
-}
-
 body {
-  height: 100%;
-  width: 100%;
+  height: 100vh;
+  width: 100vw;
   overflow: hidden;
 }
 
-.container {
+.polygonContainer {
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
-  width: 99%;
   align-items: center;
+  z-index: 0;
 }
 
 svg {

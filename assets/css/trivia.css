@@ -1,130 +1,250 @@
 body {
   text-align: center;
-  display: flex;
-  justify-content: center;
-  overflow: hidden;
+  /* display: flex;
+  justify-content: center; */
   background-color: rgb(51, 34, 58) !important;
+}
+
+#circle {
+  display: block;
+  position: absolute;
+  background-color: rgb(236, 228, 228);
+  height: 3000px;
+  width: 3000px;
+  border-radius: 50%;
+  z-index: 400;
+  top: -200px;
+  bottom: -200px;
+  left: -200px;
+  right: -200px;
+  margin: auto;
+}
+
+.menuContainer {
+  position: relative;
+  z-index: 2;
+  margin: 0 auto;
+  width: 50%;
+  height: 100%;
+  min-height: 300px;
+  min-width: 300px;
+}
+
+.polygonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-height: 110vw;
+  max-width: 150vh;
+  min-width: 400px;
+  min-height: 400px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
 div#progressBar {
   width: 100%;
 }
 
-#choicesContainer {
-  background-color: rgb(250, 237, 237);
-  border: 4px solid rgb(0, 0, 0, 0.05);
+.wrapper {
+  overflow: hidden;
+  background-color: transparent;
   border-radius: 25px;
-  height: 55vh;
-  width: 65vw;
+  height: 80%;
+  width: 80%;
+  position: absolute;
   display: flex;
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  z-index: 1;
-  min-height: 280px;
-  max-height: 95vw;
-  max-width: 80vh;
-  min-width: 250px;
-  box-shadow: 2px 2px 10px rgb(0, 0, 0, 0.4);
+  z-index: 2;
+  max-height: 105vw;
+  max-width: 90vh;
+  min-width: 300px;
+  min-height: 300px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
 }
 
-#choicesContainer h1 {
-  font-size: 140%;
-  width: 25vw;
-  margin: 0 auto;
-  max-width: 100%;
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider img {
+  margin: 0 auto 0 auto;
+  width: 45%;
+}
+
+#config {
+  pointer-events: none;
+  display: none;
+  height: 30%;
+}
+
+#config h1 {
+  margin: auto;
+  font-size: 300%;
+}
+
+#gameSearch {
+  pointer-events: none;
+  display: none;
+}
+
+.loading {
+  margin-top: 10px;
+}
+
+.loading img {
+  width: 15%;
+}
+
+h3 {
+  font-size: 120%;
+  display: none;
 }
 
 ul {
   list-style: none;
   padding: 0;
-  width: 60%;
-  margin: 0 auto;
+  width: 100%;
+  margin: auto;
+  max-width: 50vw;
+  align-items: center;
 }
 
-.choices {
-  font-size: calc(5vw+5vh);
-  margin-top: 2%;
-  padding: 2%;
+li {
+  margin: 0 auto;
+  margin-top: 3%;
   border-radius: 10px;
   border: solid transparent;
   transition: all 0.3s;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
-  min-width: 120px;
+  width: 80%;
 }
 
-.choices:hover {
+li:hover {
   background-color: rgb(0, 0, 0, 0.3);
 }
 
-.correctAnswer {
-  background-color: lightgreen;
+.slideInLeft {
+  animation-name: slideInLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
-.correctAnswer:hover {
-  background-color: lightgreen;
+.slideOutLeft {
+  animation-name: slideOutLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
-.wrongAnswer {
-  background-color: rgb(221, 73, 73);
+.slideInRight {
+  animation-name: slideInRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
-.wrongAnswer:hover {
-  background-color: rgb(221, 73, 73);
+.slideOutRight {
+  animation-name: slideOutRight;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
-.myBar {
-  border-radius: 5px;
-  display: inline-block;
-  width: 4vw;
-  height: 0.5rem;
-  background-color: lightgray;
-  max-width: 13vh;
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(1500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
 }
 
-.myProgress {
-  height: 100%;
-  width: 0;
-  transition: all 2s;
-  padding: 1%;
-}
-
-.addPoint {
-  border-radius: 5px;
-  background-color: green;
-  width: 100%;
-}
-
-#nextButton {
-  opacity: 0;
-  transition: all 2s;
-  display: none;
-  width: 50%;
-  margin: 0 auto;
-}
-
-.slideOut {
-  animation-name: slideOut;
-  animation-duration: 2s;
-}
-
-@keyframes slideOut {
+@keyframes slideOutLeft {
   5% {
     width: 25rem;
   }
-  50% {
+  90% {
     transform: translateX(-2000px);
   }
 
-  51% {
+  95% {
     transform: translateY(1300px);
   }
 
-  52% {
+  100% {
     transform: translateX(1300px);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(1500px);
+  }
+  100% {
+    transform: translateX(0px);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideOutLeft {
+  5% {
+    width: 25rem;
+  }
+  90% {
+    transform: translateX(-2000px);
+  }
+
+  95% {
+    transform: translateY(1300px);
   }
 
   100% {
+    transform: translateX(1300px);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(-1500px);
+  }
+  100% {
     transform: translateX(0px);
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slideOutRight {
+  5% {
+    width: 25rem;
+  }
+  90% {
+    transform: translateX(2000px);
+  }
+
+  95% {
+    transform: translateY(1300px);
+  }
+
+  100% {
+    transform: translateX(-1300px);
   }
 }

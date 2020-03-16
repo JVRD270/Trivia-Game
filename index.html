@@ -7,28 +7,63 @@
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="./assets/js/lib/jquery-2.1.4.min.js"></script>
-    <link rel="stylesheet" href="./assets/css/menu.css" />
     <link rel="stylesheet" href="./assets/css/trivia.css" />
-    <link rel="stylesheet" href="./assets/css/circle.css" />
+    <link rel="stylesheet" href="./assets/css/dodecagon.css" />
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     />
   </head>
   <body>
-    <div class="container">
-      <div id="choicesContainer">
-        <img
-          src="./assets/536baa79-6a59-46f0-8576-fad690627831_200x200.png"
-          alt="logo"
-        />
-        <ul>
-          <li class="choices"><a href="./questions.html">Novo Jogo</a></li>
-          <li class="choices">Configurações</li>
-          <li class="choices">Sair</li>
-        </ul>
-      </div>
+    <div id="circle"></div>
 
+    <div class="menuContainer">
+      <div class="wrapper">
+        <div id="mainMenu" class="slider">
+          <img
+            src="./assets/536baa79-6a59-46f0-8576-fad690627831_200x200.png"
+            alt=""
+          />
+          <ul>
+            <li class="menuChoices novoJogo">Novo Jogo</li>
+            <li class="menuChoices configbtn">Configurações</li>
+            <li class="menuChoices exit">Sair</li>
+            <h3 class="loading">
+              Procurando partida...
+              <img
+                class="loadingImg"
+                src="./assets/Double Ring-1.9s-243px (1).gif"
+                alt=""
+              />
+            </h3>
+          </ul>
+        </div>
+        <div id="config" class="slider">
+          <h1>Configurações</h1>
+          <ul>
+            <li class="menuChoices">Alguma coisa</li>
+            <li class="menuChoices">Outra Coisa</li>
+            <li class="menuChoices back">Voltar</li>
+            <h3 class="loading">
+              Procurando partida...
+              <img src="./assets/Double Ring-1.9s-243px (1).gif" alt="" />
+            </h3>
+          </ul>
+        </div>
+        <div id="gameSearch" class="slider">
+          <ul>
+            <li class="menuChoices procurarJogo">Partida Online</li>
+            <li class="menuChoices back">Voltar</li>
+            <h3 class="loading">
+              Procurando partida...
+              <img src="./assets/Double Ring-1.9s-243px (1).gif" alt="" />
+            </h3>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="polygonContainer">
       <svg
         class="dodecagon-cw"
         width="150vh"
@@ -110,6 +145,6 @@
       </svg>
     </div>
 
-    <script src="./assets/js/menu.js" async defer></script>
+    <script src="./assets/js/trivia.js" async defer></script>
   </body>
 </html>

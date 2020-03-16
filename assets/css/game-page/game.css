@@ -1,0 +1,317 @@
+html,
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: rgb(42, 42, 85);
+}
+
+.sides {
+  background-color: rgb(236, 228, 228);
+  height: 100%;
+  width: 50%;
+  display: block;
+  position: relative;
+  z-index: 400;
+  transition: all 1.5s;
+  margin: 0;
+}
+
+.recede {
+  animation-name: recede;
+  animation-duration: 1.5s;
+  animation-fill-mode: forwards;
+}
+
+.fill {
+  animation-name: fill;
+  animation-duration: 0.8s;
+  animation-fill-mode: forwards;
+}
+
+.rightSide {
+  float: right;
+}
+
+.leftSide {
+  float: left;
+}
+
+@keyframes recede {
+  from {
+    width: 50%;
+  }
+  to {
+    width: 30%;
+  }
+}
+
+@keyframes fill {
+  from {
+    width: 20%;
+  }
+  to {
+    width: 50%;
+  }
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.notShowing {
+  display: none !important;
+  z-index: -1;
+}
+
+#choicesContainer {
+  flex-direction: column;
+  justify-content: center;
+  z-index: -1;
+}
+
+#choicesContainer h1 {
+  font-size: 160%;
+  width: 100%;
+  height: 40%;
+  max-width: 100%;
+  margin-top: -10%;
+  margin-bottom: 10%;
+}
+
+.wrapper {
+  z-index: 0;
+  width: 40%;
+  height: 60%;
+}
+
+@media only screen and (max-width: 750px) {
+  #choicesContainer {
+    zoom: 50%;
+  }
+  #progressBar {
+    height: 100%;
+    padding-top: 180%;
+  }
+}
+
+@media only screen and (max-width: 900px) and (min-width: 750px) {
+  #choicesContainer {
+    zoom: 70%;
+  }
+  #progressBar {
+    height: 100%;
+    padding-top: 180%;
+  }
+}
+
+@media only screen and (max-width: 1200px) and (min-width: 900px) {
+  #choicesContainer {
+    zoom: 75%;
+  }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1400px) {
+  #choicesContainer {
+    zoom: 80%;
+  }
+}
+
+@media only screen and (min-width: 1400px) and (max-width: 1650px) {
+  #choicesContainer {
+    zoom: 90%;
+  }
+}
+
+h1 {
+  color: rgb(236, 228, 228);
+  margin-top: 0;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  width: 30%;
+  height: 20%;
+  margin: auto;
+  z-index: 150;
+}
+
+li {
+  background-color: rgb(236, 228, 228);
+  margin-top: 3%;
+  border-radius: 10px;
+  border: solid transparent;
+  transition: all 0.3s;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+}
+
+li:hover {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.correctAnswer {
+  background-color: lightgreen;
+}
+
+.correctAnswer:hover {
+  background-color: lightgreen;
+}
+
+.wrongAnswer {
+  background-color: rgb(221, 73, 73);
+}
+
+.wrongAnswer:hover {
+  background-color: rgb(221, 73, 73);
+}
+
+.myBar {
+  border-radius: 5px;
+  display: block;
+  width: 10vw;
+  height: 0.5rem;
+  background-color: lightgray;
+  max-width: 13vh;
+  margin: 5% auto;
+}
+
+.myProgress {
+  height: 100%;
+  width: 0;
+  transition: all 2s;
+  padding: 1%;
+}
+
+.addPoint {
+  border-radius: 5px;
+  background-color: green;
+  width: 100%;
+}
+
+.nextButton {
+  opacity: 0;
+  transition: all 2s;
+  display: none;
+  width: 50%;
+  margin: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.slideInLeft {
+  animation-name: slideInLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.slideOutLeft {
+  animation-name: slideOutLeft;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(1500px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes slideOutLeft {
+  5% {
+    width: 25rem;
+  }
+  90% {
+    transform: translateX(-2000px);
+  }
+
+  95% {
+    transform: translateY(1300px);
+  }
+
+  100% {
+    transform: translateX(1300px);
+  }
+}
+
+#trophySelection {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: 0 auto;
+  text-align: center;
+  z-index: -1;
+}
+
+#WCselection {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: 0 auto;
+  text-align: center;
+  z-index: -1;
+}
+
+#trophySelection .slider {
+  display: block;
+  margin: 10% 0;
+  text-align: center;
+  height: 1100px;
+  width: 700px;
+  white-space: nowrap;
+  overflow: show;
+}
+
+#WCselection .slider {
+  display: block;
+  margin: 10% auto;
+  text-align: center;
+}
+
+#WCselection .slider img {
+  margin-left: 23px;
+}
+
+#WCselection .trophyBtn {
+  margin-top: 35%;
+}
+
+.trophyBtn {
+  display: inline-block;
+  height: 300px;
+  width: 300px;
+  background-color: white;
+  border-radius: 30%;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+  transition: all 0.5s;
+  vertical-align: top;
+}
+
+.trophyBtn img {
+  transform: rotate(0deg);
+  margin-top: 12%;
+}
+
+.trophyBtn:hover {
+  background-color: rgba(220, 220, 220, 0.5);
+}
+
+#backToMenuMsg {
+  z-index: -1;
+}
