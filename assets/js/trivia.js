@@ -1,4 +1,4 @@
-document.html.style.zoom = 0.67;
+document.body.style.zoom = 0.67;
 
 var mainMenu = $("#mainMenu");
 var config = $("#config");
