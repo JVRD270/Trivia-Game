@@ -1,5 +1,3 @@
-document.body.style.zoom = 0.67;
-
 var mainMenu = $("#mainMenu");
 var config = $("#config");
 var gameSearch = $("#gameSearch");
@@ -59,43 +57,53 @@ function Question(theme, question, arrOfAnswers, img) {
 var wcQ = new Question(
   "Copa do Mundo",
   "Quem venceu a Copa do Mundo de 1938?",
-  ["Itália", "Alemanha", "Brasil", "Uruguai"]
+  ["Itália (Correct)", "Alemanha (Wrong)", "Brasil (Wrong)", "Uruguai (Wrong)"]
 );
 
 var LibertadoresQ = new Question(
   "Libertadores",
   "Quem ganhou a Libertadores de 1967?",
-  ["Racing de Avellaneda", "Santos", "Peñarol", "Independiente de Avellaneda"]
+  [
+    "Racing de Avellaneda (Correct)",
+    "Santos (Wrong)",
+    "Peñarol (Wrong)",
+    "Independiente de Avellaneda (Wrong)"
+  ]
 );
 
 var CincoGLQ = new Question(
   "ligas",
   "Qual o maior vencedor do campeonato Francês?",
   [
-    "Saint-Etiénne",
-    "Olympique Lyonnais",
-    "Olympique De Marseille",
-    "Paris Saint-Germain"
+    "Saint-Etiénne (Correct)",
+    "Olympique Lyonnais (Wrong)",
+    "Olympique De Marseille (Wrong)",
+    "Paris Saint-Germain (Wrong)"
   ]
 );
 
 var UCLQ = new Question(
   "UCL",
   "Qual destes clubes já venceu uma liga dos campeões?",
-  ["Celtic Glasgow", "Arsenal-ING", "Atlético de Madrid", "Manchester City"]
+  [
+    "Celtic Glasgow (Correct)",
+    "Arsenal-ING (Wrong)",
+    "Atlético de Madrid (Wrong)",
+    "Manchester City (Wrong)"
+  ]
 );
 
 var WorldQ = new Question("Rest of World", "Qual clube Zico treina no Japão?", [
-  "Kashima Antlers",
-  "Yokohama Marinos",
-  "Vissel Kobe",
-  "Gamba Osaka"
+  "Kashima Antlers (Correct)",
+  "Yokohama Marinos (Wrong)",
+  "Vissel Kobe (Wrong)",
+  "Gamba Osaka (Wrong)"
 ]);
 
 var BrQ = new Question(
   "Brasileiro",
   "Quantas vezes o Grêmio foi campeão de torneios nacionais da primeira divisão?",
-  ["8", "5", "2", "7"]
+  ["8 (Correct)", "5 (Wrong)", "2 (Wrong)", "7 (Wrong)"]
 );
 
 var currentQuestion = UCLQ;
@@ -121,6 +129,8 @@ function setQuestion(Question) {
   }
   rightChoice = Question.correctAnswer;
 }
+
+start();
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -233,18 +243,19 @@ $(".choices").on("click", function() {
         } else {
           nextSlide = trophySelectionSlide;
         }
+        $(".myProgress").removeClass("completed");
       } else if (points === 4) {
         addTrophy(trophyChosen);
         points = 0;
         nextSlide = wheelSlide;
-        $("#progress1").removeClass("addPoint");
-        $("#progress2").removeClass("addPoint");
-        $("#progress3").removeClass("addPoint");
         trophyCount++;
+        $(".myProgress1").removeClass("completed");
+        $(".myProgress2").removeClass("completed");
+        $(".myProgress3").removeClass("completed");
       }
       answerChosen = true;
       $(this).addClass("correctAnswer");
-      $("#progress" + points.toString()).addClass("addPoint");
+      $(".myProgress" + points).addClass("completed");
       $(".nextButton").css("display", "block");
       $(".nextButton").animate(
         {
@@ -257,7 +268,7 @@ $(".choices").on("click", function() {
     else {
       $(this).addClass("wrongAnswer");
       answerChosen = true;
-      nextSlide = backToMenuSlide;
+      nextSlide = wheelSlide;
       if (points === 3) {
         $.each(trophies, function(index) {
           if (trophyChosen === trophies[index]) {
@@ -547,29 +558,39 @@ $(".trophyBtn").on("click", function() {
 //////////////////////////////////////////////
 // Back to Menu
 
-$(".backToMenuBtn").click(function() {
-  nextMenu(mainMenu);
-  bigMenu.css("z-index", "100");
-  bigMenu.toggleClass("close");
-  bigMenu.toggleClass("open");
-  mainMenu.toggleClass("fadeOut");
-  gameSearch.toggleClass("fadeOut");
-  config.toggleClass("fadeOut");
-  mainMenu.toggleClass("fadeIn");
-  gameSearch.toggleClass("fadeIn");
-  config.toggleClass("fadeIn");
-  backToMenu = true;
+// $(".backToMenuBtn").click(function() {
+//   nextMenu(mainMenu);
+//   bigMenu.css("z-index", "100");
+//   bigMenu.toggleClass("close");
+//   bigMenu.toggleClass("open");
+//   mainMenu.toggleClass("fadeOut");
+//   gameSearch.toggleClass("fadeOut");
+//   config.toggleClass("fadeOut");
+//   mainMenu.toggleClass("fadeIn");
+//   gameSearch.toggleClass("fadeIn");
+//   config.toggleClass("fadeIn");
+//   backToMenu = true;
+//   nextPage();
+//   setTimeout(function() {
+//     bigMenu.removeClass("open");
+//     mainMenu.removeClass("fadeIn");
+//     gameSearch.removeClass("fadeIn");
+//     config.removeClass("fadeIn");
+//   }, 900);
+//   $(".player1").addClass("slideOutPlayer1");
+//   $(".player2").addClass("slideOutPlayer2");
+//   setTimeout(function() {
+//     $(".player1").removeClass("slideInPlayer1");
+//     $(".player1").removeClass("slideInPlayer2");
+//   }, 1000);
+// });
+
+function start() {
   nextPage();
+  $(".player1").addClass("slideInPlayer1");
+  $(".player2").addClass("slideInPlayer2");
   setTimeout(function() {
-    bigMenu.removeClass("open");
-    mainMenu.removeClass("fadeIn");
-    gameSearch.removeClass("fadeIn");
-    config.removeClass("fadeIn");
-  }, 900);
-  $(".player1").addClass("slideOutPlayer1");
-  $(".player2").addClass("slideOutPlayer2");
-  setTimeout(function() {
-    $(".player1").removeClass("slideInPlayer1");
-    $(".player1").removeClass("slideInPlayer2");
-  }, 1000);
-});
+    $(".player1").removeClass("slideOutPlayer1");
+    $(".player2").removeClass("slideOutPlayer2");
+  }, 100);
+}
