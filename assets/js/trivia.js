@@ -434,16 +434,16 @@ function nextPage() {
         $(" .wrapper").css("pointer-events", "none");
         currentSlide.parent().css("z-index", "-1");
         nextSlide.parent().css("z-index", "100");
-      }, 400);
+      }, 50);
       setTimeout(function() {
         nextSlide.removeClass("slideInLeft");
         $(".wrapper").css("pointer-events", "all");
         $(".wrapper").css("pointer-events", "all");
-      }, 1200);
+      }, 800);
       setTimeout(function() {
         currentSlide = nextSlide;
         nextSlide = displaySlide;
-      }, 1300);
+      }, 850);
     }
   }
 }
